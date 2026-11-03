@@ -15,6 +15,13 @@
   --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-head: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --line-high: rgba(74, 222, 128, 0.45);
+  --line-mid: rgba(242, 193, 78, 0.45);
+  --line-mid-strong: rgba(242, 193, 78, 0.5);
+  --low-bg: rgba(242, 109, 109, 0.1);
+  --low-line: rgba(242, 109, 109, 0.4);
+  --low-text: #ffb4b4;
+  --placeholder: #5d6575;
 }
 
 * { box-sizing: border-box; }
@@ -76,7 +83,7 @@ textarea {
   font-size: 13.5px;
   line-height: 1.6;
 }
-textarea::placeholder { color: #5d6575; }
+textarea::placeholder { color: var(--placeholder); }
 textarea:focus-visible, button:focus-visible, summary:focus-visible, h2:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
@@ -122,9 +129,9 @@ h2:focus-visible { outline-offset: 4px; border-radius: 4px; }
   margin: 0;
   padding: 10px 14px;
   border-radius: 10px;
-  background: rgba(242, 109, 109, 0.1);
-  border: 1px solid rgba(242, 109, 109, 0.4);
-  color: #ffb4b4;
+  background: var(--low-bg);
+  border: 1px solid var(--low-line);
+  color: var(--low-text);
   font-size: 14px;
 }
 
@@ -230,3 +237,69 @@ h2 { font-family: var(--font-head); font-size: 20px; margin: 0 0 8px; letter-spa
 .tag { display: inline-block; margin-top: 6px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--border); color: var(--muted); }
 .tag.ai { color: var(--accent); border-color: var(--accent); }
 .hint.unfilled { color: var(--mid); }
+
+/* Light theme. Same style names, second set of values. A saved choice sets data-theme on the root element. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+  color-scheme: light;
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --surface-2: #eceef3;
+  --border: #d5d9e2;
+  --text: #14161b;
+  --muted: #566070;
+  --accent: #8a5e00;
+  --accent-ink: #ffffff;
+  --low: #c62828;
+  --mid: #8a5e00;
+  --high: #137a3b;
+  --line-high: rgba(19, 122, 59, 0.45);
+  --line-mid: rgba(138, 94, 0, 0.45);
+  --line-mid-strong: rgba(138, 94, 0, 0.55);
+  --low-bg: rgba(198, 40, 40, 0.08);
+  --low-line: rgba(198, 40, 40, 0.4);
+  --low-text: #8f1d1d;
+  --placeholder: #8a93a3;
+  }
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --surface-2: #eceef3;
+  --border: #d5d9e2;
+  --text: #14161b;
+  --muted: #566070;
+  --accent: #8a5e00;
+  --accent-ink: #ffffff;
+  --low: #c62828;
+  --mid: #8a5e00;
+  --high: #137a3b;
+  --line-high: rgba(19, 122, 59, 0.45);
+  --line-mid: rgba(138, 94, 0, 0.45);
+  --line-mid-strong: rgba(138, 94, 0, 0.55);
+  --low-bg: rgba(198, 40, 40, 0.08);
+  --low-line: rgba(198, 40, 40, 0.4);
+  --low-text: #8f1d1d;
+  --placeholder: #8a93a3;
+}
+
+/* Theme toggle */
+.theme-toggle {
+  position: fixed;
+  top: max(12px, env(safe-area-inset-top, 0px));
+  right: max(12px, env(safe-area-inset-right, 0px));
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }

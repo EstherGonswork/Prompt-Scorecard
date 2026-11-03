@@ -35,12 +35,21 @@ To change how Quick check scores, edit `data/quickRules.ts`. No interface code c
 - The page shows a reminder to use a key with a low spend limit.
 - Never commit a key. This project has no environment file because it needs none.
 
+## Light and dark mode
+
+A round button in the top right corner switches the theme.
+
+- With no saved choice, the page follows the device setting.
+- A tap saves the choice in this browser's local storage under `prompt-scorecard.theme`. If storage is blocked, the switch still works until the page closes.
+- A small script in the page head sets the saved theme before the first paint, so a returning visitor sees no flash of the other theme.
+- Light mode swaps colour values only. The tokens sit at the top of `app/globals.css`, with the light set under `data-theme="light"` and under the light device setting.
+
 ## Run it locally
 
 ```bash
 npm install
 npm run dev        # http://localhost:3000
-npm test           # 46 tests
+npm test           # 56 tests
 npm run typecheck
 ```
 
@@ -52,12 +61,13 @@ npm run typecheck
 
 ## Publish on GitHub Pages (free)
 
-1. Create a repository named `Prompt-Scorecard`. If you use another name, change `/Prompt-Scorecard` in the `build:pages` script in `package.json`.
-2. Run `npm run build:pages`. The site lands in the `out` folder.
-3. Publish the contents of `out` with any Pages workflow, or push them to a `gh-pages` branch. The file `public/.nojekyll` is copied into `out` so Pages serves the `_next` folder.
-4. In the repository settings, open Pages and point it at that branch or workflow.
+The file `.github/workflows/pages.yml` builds and publishes the site every time you push to `main`. It reads the repository name and sets the base path itself, so any repository name works.
 
-A site at the root of its own domain needs no base path. Run `npm run build` instead.
+1. Upload the project files to a new repository (drag the unzipped folder contents into the upload page).
+2. Open Settings, then Pages. Under Build and deployment, set Source to GitHub Actions.
+3. Open the Actions tab and wait for the run to finish. The site address appears in the deploy step and on the Pages settings screen.
+
+A site at the root of its own domain needs no base path. Run `npm run build` locally instead.
 
 ## How it was built
 
